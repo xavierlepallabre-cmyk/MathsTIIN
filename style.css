@@ -132,3 +132,13 @@ html.board .err-lines button,html.board .ord-pool button,html.board .choice-grid
 #triOk{justify-self:start}
 html.board .tri-chips button{font-size:21px;padding:14px 20px}
 @media(max-width:620px){.inter .exercise-visual{overflow-x:auto;padding:8px}.inter .touch-svg{min-width:560px}.inter .exercise-visual::after{content:"↔ faire glisser si besoin";display:block;font-size:11px;color:var(--muted);text-align:right}}
+/* ===== touches mathématiques ===== */
+.mathkeys{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.mathkeys button{appearance:none;flex:1 1 52px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:700 18px var(--font);cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.mathkeys button:active{background:var(--accent-soft);color:var(--accent-text)}
+.mathkeys button[data-abc]{font-size:12px;letter-spacing:.06em;color:var(--muted)}.mathkeys button.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tools-drawer .mathkeys button{min-height:38px;font-size:15px}
+html.board .mathkeys button{font-size:24px;min-height:56px}
+.answer-row.has-keys{flex-wrap:wrap}.answer-row.has-keys .mathkeys{flex-basis:100%;order:2;margin-top:0}
+@media(max-width:620px){.answer-row.has-keys .mathkeys{grid-column:1/-1;order:1}.answer-row.has-keys .btn{order:2}}
+.mathkeys button{flex:1 1 40px;padding:0 4px}

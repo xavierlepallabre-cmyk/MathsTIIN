@@ -178,6 +178,7 @@
   if(new RegExp(`^${num}/${num}$`).test(s)){const [a,b]=s.split('/').map(Number);return b?a/b:NaN}
   if((m=s.match(new RegExp(`^(${num})\\*10\\^\\(?([-+]?\\d+)\\)?$`))))return Number(m[1])*10**Number(m[2]);
   if((m=s.match(/^([-+]?)10\^\(?([-+]?\d+)\)?$/)))return (m[1]==='-'?-1:1)*10**Number(m[2]);
+  if((m=s.match(new RegExp(`^\\(?(${num})\\)?\\^\\(?([-+]?\\d+)\\)?$`))))return Number(m[1])**Number(m[2]);
   if(new RegExp(`^${num}(?:e[-+]?\\d+)?$`,'i').test(s))return Number(s);
   return NaN}
  // Nombre de décimales tapées (pour accepter un arrondi correct de la valeur exacte)

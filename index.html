@@ -80,7 +80,7 @@
       <form id="answerForm" novalidate>
         <label for="answerInput">Ta réponse</label>
         <div class="answer-row"><input id="answerInput" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex. 12,5 ou 3/4"><span id="answerUnit" class="unit"></span><button class="btn btn-primary" type="submit">Valider</button></div>
-        <p class="input-help">Acceptés : 12,5 · 3/4 · 2,5×10^-3 · 1e-3. Un arrondi correct (au moins 2 chiffres significatifs) est accepté.</p>
+        <p class="input-help">Utilise les touches sous le champ pour « / », « − » ou « ×10^ ». Exemples : 12,5 · 3/4 · 2,5×10^-3. Un arrondi correct (au moins 2 chiffres significatifs) est accepté.</p>
       </form>
       <div id="feedback" class="feedback" hidden></div>
       <div class="help-actions"><button id="hintBtn" class="btn btn-ghost" type="button">Un indice</button><button id="correctionBtn" class="btn btn-ghost" type="button">Voir la correction</button></div>
@@ -128,6 +128,7 @@
 </div>
 
 <footer><div class="credits"><p><strong>Conception originale : Xavier Le Pallabre</strong></p><p>Ressource pédagogique développée à titre personnel, avec l'assistance d'outils d'intelligence artificielle.</p><p>© 2026 Xavier Le Pallabre — Attribution de l'auteur original à conserver lors des réutilisations et adaptations, conformément à la licence applicable (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" rel="license noopener" target="_blank">CC BY-NC-SA 4.0</a>).</p></div><span>Maths TIIN v0.4 · progression enregistrée uniquement sur cet appareil</span></footer>
+<script src="keys.js"></script>
 <script src="exercises.js"></script>
 <script src="cours.js"></script>
 <script src="sims.js"></script>

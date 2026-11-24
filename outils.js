@@ -22,7 +22,7 @@
   const a=r(11,49),b=r(11,49);return [`${a} + ${b}`,a+b]}
  function startMental(){open('Calcul mental · 60 secondes');let left=60,score=0,errs=0,q;
   body.innerHTML=`<div class="mental-top"><div class="mental-time"><i id="mBar"></i></div><b id="mLeft">60 s</b><span id="mScore">0 point</span></div><div class="mental-q" id="mQ"></div><form id="mForm" class="answer-row"><input id="mIn" inputmode="decimal" autocomplete="off" aria-label="Réponse"><button class="btn btn-primary">OK</button></form><p class="muted" id="mFb">Réponds le plus vite possible. Une erreur ne fait pas perdre de point.</p>`;
-  const next=()=>{q=mentalQ();$('#mQ').textContent=q[0];$('#mIn').value='';$('#mIn').focus()};
+  MathKeys.attach($('#mIn'));const next=()=>{q=mentalQ();$('#mQ').textContent=q[0];$('#mIn').value='';$('#mIn').focus()};
   $('#mForm').onsubmit=e=>{e.preventDefault();const r=check({answer:q[1],exact:Number.isInteger(q[1])},$('#mIn').value);if(r.input)return;if(r.ok){score++;$('#mFb').textContent='✔ Juste';$('#mQ').classList.remove('shake');}else{errs++;$('#mFb').textContent=`✘ ${q[0]} = ${nf(q[1])}`;$('#mQ').classList.add('shake')}$('#mScore').textContent=`${score} point${score>1?'s':''}`;next()};
   next();timer=setInterval(()=>{left--;$('#mLeft').textContent=left+' s';$('#mBar').style.width=(left/60*100)+'%';if(left<=0){clearInterval(timer);endMental(score,errs)}},1000)}
  function endMental(score,errs){const rec=store.get('maths-tiin-record',0),best=score>rec;if(best)store.set('maths-tiin-record',score);renderRecord();
@@ -31,7 +31,7 @@
 
  // Échauffement : 5 exercices de thèmes différents (niveaux 1-2), avec correction immédiate
  function startWarmup(){open('Échauffement · 5 exercices');const themes=THEMES.map((_,i)=>i).sort(()=>Math.random()-.5).slice(0,5);const list=themes.map((t,i)=>generate(t,i<3?1:2));let i=0,score=0;
-  const show=()=>{const e=list[i];body.innerHTML=`<div class="diag-progress"><span>${i+1} / 5</span><div><i style="width:${i/5*100}%"></i></div></div><h3>${THEMES[e.theme].name}</h3>${e.visual||''}<p class="question">${e.question}</p><form id="wForm"><div class="answer-row"><input id="wIn" inputmode="decimal" autocomplete="off" aria-label="Réponse"><span class="unit">${e.unit}</span><button class="btn btn-primary">Valider</button></div></form><div id="wFb"></div>`;$('#wIn').focus();
+  const show=()=>{const e=list[i];body.innerHTML=`<div class="diag-progress"><span>${i+1} / 5</span><div><i style="width:${i/5*100}%"></i></div></div><h3>${THEMES[e.theme].name}</h3>${e.visual||''}<p class="question">${e.question}</p><form id="wForm"><div class="answer-row"><input id="wIn" inputmode="decimal" autocomplete="off" aria-label="Réponse"><span class="unit">${e.unit}</span><button class="btn btn-primary">Valider</button></div></form><div id="wFb"></div>`;MathKeys.attach($('#wIn'));$('#wIn').focus();
    $('#wForm').onsubmit=ev=>{ev.preventDefault();const r=check(e,$('#wIn').value);if(r.input){$('#wFb').innerHTML=`<p class="feedback bad">${r.message}</p>`;return}if(r.ok)score++;progress.record(e.theme,e.level,r.ok);
     $('#wFb').innerHTML=`<div class="feedback ${r.ok?'ok':'bad'}">${r.ok?'Juste !':'Pas tout à fait.'} <small>${e.correction}</small></div><button class="btn btn-primary" id="wNext" style="margin-top:12px">${i<4?'Suivant':'Voir le bilan'}</button>`;$('#wForm').querySelector('button').disabled=true;$('#wNext').focus();
     $('#wNext').onclick=()=>{i++;if(i<5)show();else{body.innerHTML=`<div class="diag-result-score">${score} / 5</div><p>${score===5?'Parfait, tu es prêt pour la séance.':score>=3?'Bon échauffement. Reprends les thèmes manqués.':'Revois les fiches de cours des thèmes manqués.'}</p><div class="sim-actions"><button class="btn btn-primary" id="wAgain">Recommencer</button><button class="btn btn-ghost" id="wClose">Fermer</button></div>`;$('#wAgain').onclick=startWarmup;$('#wClose').onclick=close}}}};
@@ -70,7 +70,7 @@
    <div class="conv-arrow">↓</div><div class="conv-row"><output id="convR"></output><select id="convB">${Object.keys(CONV[g].u).map(u=>`<option ${u===CONV[g].d[1]?'selected':''}>${u}</option>`).join('')}</select></div><p class="muted" id="convS"></p>`;
    const upd=()=>{const G=CONV[$('#convG').value],v=parse($('#convV').value),a=$('#convA').value,b=$('#convB').value,r=v*G.u[a]/G.u[b];$('#convR').textContent=Number.isFinite(r)?nf(r,6):'—';
     const f=G.u[a]/G.u[b];$('#convS').textContent=Number.isFinite(r)?`1 ${a} = ${nf(f,9)} ${b}`:'Saisis une valeur (ex. 2,5 ou 3e-3).'};
-   $('#convG').onchange=()=>{$('#convV').value='1';renderTools()};['convV','convA','convB'].forEach(id=>$('#'+id).addEventListener('input',upd));upd()}
+   $('#convG').onchange=()=>{$('#convV').value='1';renderTools()};['convV','convA','convB'].forEach(id=>$('#'+id).addEventListener('input',upd));MathKeys.attach($('#convV'),{after:$('#convV').closest('.conv-row')});upd()}
   else{const F=FORM[fi],keys=Object.keys(F.v);if(!cible||!keys.includes(cible))cible=keys[0];
    box.innerHTML=`<label class="sim-ctl"><span>Formule</span><select id="formSel">${FORM.map((f,i)=>`<option value="${i}" ${i===fi?'selected':''}>${f.n} · ${f.f}</option>`).join('')}</select></label>
    <p class="muted">Je cherche :</p><div class="sim-toggle">${keys.map(k=>`<button type="button" data-k="${k}" class="${k===cible?'active':''}">${k}</button>`).join('')}</div>
@@ -78,7 +78,7 @@
    <div class="tool-result" id="formR">—</div>`;
    $('#formSel').onchange=e=>{fi=+e.target.value;cible=null;renderTools()};$$('#toolsBody [data-k]').forEach(b=>b.onclick=()=>{cible=b.dataset.k;renderTools()});
    const upd=()=>{const x={};let okAll=true;$$('#toolsBody [data-in]').forEach(i=>{const v=parse(i.value);x[i.dataset.in]=v;if(!Number.isFinite(v))okAll=false});const r=okAll?F.s[cible](x):NaN;$('#formR').innerHTML=Number.isFinite(r)?`${cible} = <b>${nf(r,4)}</b> ${F.v[cible][0]}`:'Remplis les deux valeurs connues.'};
-   $$('#toolsBody [data-in]').forEach(i=>i.addEventListener('input',upd));upd()}}
+   $$('#toolsBody [data-in]').forEach(i=>{i.addEventListener('input',upd);MathKeys.attach(i,{after:i.closest('.form-in')})});upd()}}
  $('#toolsBtn').onclick=()=>{drawer.hidden=!drawer.hidden;$('#toolsBtn').setAttribute('aria-expanded',String(!drawer.hidden));if(!drawer.hidden)renderTools()};
  $('#closeTools').onclick=()=>{drawer.hidden=true;$('#toolsBtn').setAttribute('aria-expanded','false')};
  $$('#toolsTabs button').forEach(b=>b.onclick=()=>{toolTab=b.dataset.t;renderTools()});
