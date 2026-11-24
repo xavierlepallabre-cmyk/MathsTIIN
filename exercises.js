@@ -108,7 +108,7 @@
    else{const C=P([400,800,1200]),k=I(1,7);visual=gline(0,1,8,k);q=`La jauge d’une cuve d’effluents de ${C} L va de 0 (vide) à 1 (pleine), en 8 parts égales. Le niveau est en A. Quel volume contient la cuve ?`;a=C*k/8;unit='L';hints=['Lis d’abord la fraction indiquée par A.','Volume = capacité × fraction.'];corr=`A = ${k}/8 ; V = ${C} × ${k} ÷ 8 = ${fr(a)} L.`}
   }
   return {question:q,answer:a,unit,hints,correction:corr,visual}}
- const minus=s=>String(s).replace(/(^|[\s(=:;,/×+−])-(?=\d)/g,'$1−');
+ const minus=s=>String(s).replace(/(^|[\s(=:;,/×+−])-(?=\d)/g,'$1−').replace(/(\d)\.(\d)/g,'$1,$2');
  function ex(theme,level,random=Math.random){return polish(ex0(theme,level,random))}
  function polish(e){e.question=minus(e.question);e.correction=minus(e.correction);e.hints=e.hints.map(minus);return e}
  function ex0(theme,level,random=Math.random){
