@@ -129,7 +129,19 @@
    [[t1,'cv-fill-brand'],[t2,'cv-fill-accent']].forEach(([t,c])=>{g+=`<line x1="${X(t)}" y1="210" x2="${X(t)}" y2="${Yp(f(t))}" class="cv-read"/><line x1="60" y1="${Yp(f(t))}" x2="${X(t)}" y2="${Yp(f(t))}" class="cv-read"/><circle cx="${X(t)}" cy="${Yp(f(t))}" r="7" class="${c}"/>`});
    g+=`<text x="580" y="246" text-anchor="end" class="cv-small">temps (min)</text><text x="66" y="14" class="cv-small">température (°C)</text>`;el.querySelector('#g').innerHTML=g;
    const d=f(t2)-f(t1);el.querySelector('#out').innerHTML=`À ${t1} min : <b>${nf(f(t1),1)} °C</b> · à ${t2} min : <b>${nf(f(t2),1)} °C</b><br>${t1===t2?'Choisis deux instants différents.':`Variation moyenne = (${nf(f(t2),1)} − ${nf(f(t1),1)}) ÷ (${t2} − ${t1}) = <b>${sg(Number((d/(t2-t1)).toFixed(2)))} °C/min</b>`}`});
+ }} ,// 12 — Décimaux : droite graduée réglable
+ {titre:'Choisis l’échelle et le nombre d’intervalles, puis déplace le point A',mount(el){
+  el.innerHTML=`<div class="sim-ctls"><label class="sim-ctl"><span>Échelle</span><select id="sc"><option value="0,1">de 0 à 1</option><option value="2,3">de 2 à 3</option><option value="0.7,0.8">de 0,7 à 0,8 (zoom)</option><option value="20,30">radiamètre 20 → 30 µSv/h</option></select></label>${slider('n','Intervalles :',2,10,1,4)}${slider('k','Position de A :',0,10,1,3)}</div><svg class="cv sim-svg" viewBox="0 0 600 130" id="g"></svg><div class="sim-result" id="out"></div>`;
+  const q=id=>el.querySelector('#'+id);
+  const up=()=>{const [a,b]=q('sc').value.split(',').map(Number),n=+q('n').value;let k=+q('k').value;q('k').max=n;if(k>n){k=n;q('k').value=n}q('nV').textContent=n;q('kV').textContent=k;
+   const X=i=>40+i*520/n,gr=(b-a)/n,v=a+k*gr;let g=`<line x1="25" y1="70" x2="575" y2="70" class="cv-line-b"/>`;
+   for(let i=0;i<=n;i++)g+=`<line x1="${X(i)}" y1="${i===0||i===n?54:60}" x2="${X(i)}" y2="${i===0||i===n?86:80}" class="cv-line"/>`;
+   g+=`<text x="${X(0)}" y="110" text-anchor="middle" class="cv-tb">${nf(a)}</text><text x="${X(n)}" y="110" text-anchor="middle" class="cv-tb">${nf(b)}</text><circle cx="${X(k)}" cy="70" r="9" class="cv-fill-accent sim-pop"/><text x="${X(k)}" y="40" text-anchor="middle" class="cv-tb cv-accent-t">A</text>`;
+   q('g').innerHTML=g;const frac=a===0&&b===1?` = ${k}/${n}`:'';
+   q('out').innerHTML=`Une graduation = (${nf(b)} − ${nf(a)}) ÷ ${n} = <b>${nf(gr,4)}</b><br>A = ${nf(a)} + ${k} × ${nf(gr,4)} = <b>${nf(v,4)}</b>${frac}`};
+  ['sc','n','k'].forEach(id=>q(id).addEventListener('input',up));up();
  }}
+
  ];
  root.MathsSims=SIMS;
 })(globalThis);

@@ -31,7 +31,7 @@ console.log(`OK — ${n} exercices générés et vérifiés, saisie et arrondis 
 // ---- Exercices interactifs ----
 const X = require('./interactifs.js');
 let m = 0;
-for (let t = 0; t < 12; t++) for (const k of X.kindsFor(t)) for (let i = 0; i < 150; i++) {
+for (let t = 0; t < M.THEMES.length; t++) for (const k of X.kindsFor(t)) for (let i = 0; i < 150; i++) {
   const e = X.generate(t, 1 + (i % 3), Math.random, k); m++;
   const txt = JSON.stringify(e);
   if (/undefined|NaN|Infinity/.test(txt)) fail(`Interactif cassé t${t} ${k} : ${txt.slice(0, 200)}`);
@@ -39,6 +39,9 @@ for (let t = 0; t < 12; t++) for (const k of X.kindsFor(t)) for (let i = 0; i < 
   if (k === 'erreur' && !(e.bad >= 0 && e.bad < e.lines.length)) fail(`Erreur invalide t${t}`);
   if (k === 'ordre' && (e.order.length !== e.steps.length || e.order.every((v, j) => v === j))) fail(`Ordre invalide t${t}`);
   if (k === 'toucher' && !(e.ok >= 0 && e.ok < e.pts.length)) fail(`Point cible introuvable t${t}`);
+  if (k === 'tri' && (!e.parts.some(p => p[1]) || !e.parts.some(p => !p[1]))) fail(`Tri invalide t${t}`);
 }
-const covered = [...Array(12).keys()].filter(t => X.kindsFor(t).length).length;
-console.log(`OK — ${m} exercices interactifs générés (${covered}/12 thèmes couverts)`);
+const covered = M.THEMES.map((_, t) => t).filter(t => X.kindsFor(t).length).length;
+if (M.ORDER.length !== M.THEMES.length || new Set(M.ORDER).size !== M.THEMES.length) fail('ORDER incomplet');
+const C = require('./cours.js'); if (C.length !== M.THEMES.length) fail('Fiches de cours manquantes');
+console.log(`OK — ${m} exercices interactifs générés (${covered}/${M.THEMES.length} thèmes couverts)`);

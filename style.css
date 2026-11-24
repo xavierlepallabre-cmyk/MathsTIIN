@@ -123,3 +123,12 @@ html.board .err-lines button,html.board .ord-pool button,html.board .choice-grid
 @media(max-width:620px){.defi-card{flex-wrap:wrap}.defi-card .btn{width:100%}.choice-grid{grid-template-columns:1fr}.tools-fab span{display:none}.tools-fab{padding:14px}.tools-drawer{right:12px;bottom:76px}#boardBtn{display:none}.top-actions{gap:4px}.mental-q{font-size:38px}}
 .sim-svg{max-width:760px;margin:0 auto;width:100%}
 .conv-row input,.conv-row select,.conv-row output,.sim-ctl select,.form-in input{min-width:0;width:100%;box-sizing:border-box}.tools-drawer{box-sizing:border-box}.tools-drawer>*{min-width:0}
+/* ===== v0.4 ===== */
+.gl .gl-lab{font:600 13px var(--font);fill:var(--ink)}.gl .gl-ptr{fill:var(--accent)}.gl .gl-A{font:700 14px var(--font);fill:var(--accent-text)}.gl{height:auto}
+.tri-chips{display:flex;flex-wrap:wrap;gap:8px}
+.tri-chips button{appearance:none;border:1.5px dashed var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:10px 15px;font:500 15px var(--font);cursor:pointer;transition:.15s}
+.tri-chips button.on{border-style:solid;border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--surface));font-weight:700}
+.tri-chips button.off{opacity:.45;text-decoration:line-through}
+#triOk{justify-self:start}
+html.board .tri-chips button{font-size:21px;padding:14px 20px}
+@media(max-width:620px){.inter .exercise-visual{overflow-x:auto;padding:8px}.inter .touch-svg{min-width:560px}.inter .exercise-visual::after{content:"↔ faire glisser si besoin";display:block;font-size:11px;color:var(--muted);text-align:right}}

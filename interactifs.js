@@ -55,12 +55,35 @@
  };
 
  const TABLE={erreur:ERR,ordre:ORD,choix:CH,toucher:TOU};
+ // ---------- Thème 12 (décimaux) + format « Repère les données utiles » ----------
+ ERR[12]=(I,P)=>{const x=I(3,9),y=I(10*(x-1)+1,10*x-1);const A=nf(x/10,1),B=nf(y/100,2);return {q:`Ranger ${A} et ${B} du plus petit au plus grand.`,lines:[`On compare les parties décimales : ${x} et ${y}`,`${y} > ${x}, donc ${B} > ${A}`,`Rangement : ${A} < ${B}`],bad:0,why:`On ne compare pas « ${x} » et « ${y} » : on écrit ${A} = ${nf(x/10,1)}0, soit ${x*10} centièmes, contre ${y} centièmes. Donc ${B} < ${A}.`}};
+ CH[12]=(I,P)=>{const k=I(0,2);if(k===0){const n=I(1,9);return {q:`0,${n} s’écrit en fraction…`,ok:`${n}/10`,opts:[`${n}/10`,`0/${n}`,`${n}/100`,`1/${n}`],why:`0,${n} = ${n} dixième${n>1?'s':''} = ${n}/10.`}}
+  if(k===1){const lo=I(11,89)/10,c=Math.round(lo*100+I(1,9))/100,f2=x=>x.toFixed(2).replace('.',',');return {q:`Quel nombre est compris entre ${nf(lo,1)} et ${nf(lo+0.1,1)} ?`,ok:nf(c,2),opts:[nf(c,2),nf(lo+0.2,1),nf(lo-0.1,1),nf(Math.round(lo*10),0)],why:`${nf(lo,1)} = ${f2(lo)} et ${nf(lo+0.1,1)} = ${f2(lo+0.1)} : ${nf(c,2)} est entre les deux.`}}
+  const [f,v]=P([['3/4','0,75'],['1/2','0,5'],['1/4','0,25'],['1/5','0,2']]);return {q:`${f} est égal à…`,ok:v,opts:[v,f.replace('/',','),'0,'+f.replace('/',''),f.split('/')[1]+','+f.split('/')[0]],why:`${f} = ${f.replace('/',' ÷ ')} = ${v}.`}};
+ TOU[12]=(I,P)=>{const k=I(0,2);const mk=(a,b,n,target,lab)=>{const X=i=>40+i*520/n;let g=`<line x1="25" y1="60" x2="575" y2="60" class="cv-line-b"/>`;const pts=[];
+   for(let i=0;i<=n;i++){const v=Math.round((a+i*(b-a)/n)*1e6)/1e6,big=Math.abs(v-Math.round(v))<1e-9;g+=`<line x1="${X(i)}" y1="${big?44:51}" x2="${X(i)}" y2="${big?76:69}" class="cv-line"/>`;if(big)g+=`<text x="${X(i)}" y="100" text-anchor="middle" class="cv-tb">${nf(v)}</text>`;pts.push({x:X(i),y:60,v})}
+   const ok=pts.findIndex(p=>Math.abs(p.v-target)<1e-9);return {q:`Touche la position de ${lab} sur la droite graduée.`,svg:g,vb:'0 0 600 115',pts,ok,why:`Une graduation vaut ${nf((b-a)/n,3)} : ${lab} est à ${ok} graduation${ok>1?'s':''} de ${nf(a)}.`}};
+  if(k===0){const t=I(1,9);return mk(0,1,10,t/10,nf(t/10,1))}
+  if(k===1){const t=P([1,3,5,7]);return mk(0,2,8,t/4,`${t}/4`)}
+  const t=I(1,9);return mk(1,2,10,1+t/10,nf(1+t/10,1))};
+
+ // « Repère les données utiles » : énoncé long, l'élève touche les données nécessaires
+ const TRI={
+  0:(I,P)=>{const n=I(4,9),p=P([12,14,18]),port=P([7,9,12]);return {q:'Une commande de pièces de rechange pour un chantier en zone contrôlée.',parts:[[`${n} joints`,1],[`à ${p} € pièce`,1],[`livrés en 48 h`,0],[`référence 3125`,0],[`${port} € de frais de port`,1],[`pour le local R-${I(100,399)}`,0]],ask:'Quelles données faut-il pour calculer le montant total ?',calc:`${n} × ${p} + ${port} = ${n*p+port} €`}},
+  3:(I,P)=>{const D=P([25,40,60,80]),h=P([1.5,2,3]);return {q:'Préparation d’une intervention en zone contrôlée.',parts:[[`un intervenant de ${I(22,55)} ans`,0],[`débit de dose : ${D} µSv/h`,1],[`dosimètre n° ${I(1000,9999)}`,0],[`durée : ${nf(h)} h`,1],[`local au ${I(1,4)}e étage`,0],[`équipe de ${I(2,4)} personnes`,0]],ask:'Quelles données faut-il pour calculer la dose reçue par l’intervenant ?',calc:`Dose = ${D} × ${nf(h)} = ${nf(D*h)} µSv = ${nf(D*h/1000,3)} mSv`}},
+  4:(I,P)=>{const V=P([3,6,9]),q=P([100,120,150,200]);return {q:'Vidange d’une cuve d’effluents.',parts:[[`cuve T-${I(100,399)}`,0],[`volume : ${V} m³`,1],[`installée en ${I(1995,2020)}`,0],[`pompe de ${q} L/min`,1],[`moteur alimenté en 400 V`,0],[`tuyau de ${I(5,20)} m`,0]],ask:'Quelles données faut-il pour calculer la durée de la vidange ?',calc:`${V} m³ = ${V*1000} L ; t = ${V*1000} ÷ ${q} ≈ ${nf(V*1000/q,1)} min`}},
+  6:(I,P)=>{const N=P([40,50,80]),k=I(3,9);return {q:'Bilan des contrôles d’étanchéité de la semaine.',parts:[[`${N} contrôles réalisés`,1],[`par ${I(2,4)} intervenants`,0],[`en ${I(3,5)} jours`,0],[`${k} non conformes`,1],[`sur ${I(2,6)} bâtiments`,0]],ask:'Quelles données faut-il pour calculer le taux de non-conformité ?',calc:`${k} ÷ ${N} × 100 = ${nf(k/N*100,2)} %`}},
+  7:(I,P)=>{const P0=P([1150,2000,2300]),U=230;return {q:'Un radiateur de chantier est branché dans un local technique.',parts:[[`puissance : ${P0} W`,1],[`tension : ${U} V`,1],[`masse : ${I(4,9)} kg`,0],[`largeur : ${I(40,80)} cm`,0],[`acheté ${I(80,200)} €`,0]],ask:'Quelles données faut-il pour calculer l’intensité absorbée (P = U × I) ?',calc:`I = ${P0} ÷ ${U} ≈ ${nf(P0/U,2)} A`}},
+  9:(I,P)=>{const D=P([1,1.2,1.6]),h=P([1.5,2,2.5]);return {q:'Une cuve cylindrique de rétention.',parts:[[`diamètre : ${nf(D)} m`,1],[`hauteur : ${nf(h)} m`,1],[`posée à ${I(2,5)} m du mur`,0],[`peinte en ${I(2015,2024)}`,0],[`épaisseur de tôle : ${I(4,8)} mm`,0]],ask:'Quelles données faut-il pour calculer son volume ?',calc:`V = π × (${nf(D)} ÷ 2)² × ${nf(h)} ≈ ${nf(Math.PI*(D/2)**2*h,3)} m³`}}
+ };
+ TABLE.tri=TRI;KIND.tri='Repère les données utiles';
  function kindsFor(theme){return Object.keys(TABLE).filter(k=>TABLE[k][theme])}
  function generate(theme,level,random=Math.random,kind){
   const ks=kindsFor(theme);if(!ks.length)return null;const k=kind&&ks.includes(kind)?kind:ks[Math.floor(random()*ks.length)];
   const I=(a,b)=>Math.floor(random()*(b-a+1))+a,P=a=>a[Math.floor(random()*a.length)];
   const d=TABLE[k][theme](I,P);
   if(k==='choix'){const opts=shuffle([...new Set(d.opts)],random);d.opts=opts;d.okIndex=opts.indexOf(d.ok)}
+  if(k==='tri'){d.parts=shuffle(d.parts,random)}
   if(k==='ordre'){d.order=shuffle(d.steps.map((_,i)=>i),random);if(d.order.every((v,i)=>v===i))d.order.reverse()}
   return Object.assign({inter:true,kind:k,kindLabel:KIND[k],theme,level},d)}
 
@@ -78,6 +101,12 @@
   else if(ex.kind==='choix'){
    el.innerHTML=`<p class="question">${ex.q}</p><div class="choice-grid">${ex.opts.map((o,i)=>`<button type="button" data-i="${i}">${o}</button>`).join('')}</div><div class="inter-fb" hidden></div>`;
    el.querySelectorAll('.choice-grid button').forEach(b=>b.onclick=()=>{if(done)return;const ok=+b.dataset.i===ex.okIndex;b.classList.add(ok?'good':'wrong');fb(ok,ok?`Exact. ${ex.why}`:'Non. Réfléchis encore ou consulte le cours.');finish(ok)})}
+  else if(ex.kind==='tri'){
+   const sel=new Set();el.innerHTML=`<p class="question">${ex.q}</p><p><b>${ex.ask}</b></p><p class="muted">Touche toutes les données utiles, puis valide. Les autres informations sont là pour t’entraîner à trier.</p><div class="tri-chips">${ex.parts.map((p,i)=>`<button type="button" data-i="${i}" aria-pressed="false">${p[0]}</button>`).join('')}</div><button type="button" class="btn btn-primary" id="triOk">Valider ma sélection</button><div class="inter-fb" hidden></div>`;
+   el.querySelectorAll('.tri-chips button').forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);b.classList.toggle('on',sel.has(i));b.setAttribute('aria-pressed',String(sel.has(i)))});
+   el.querySelector('#triOk').onclick=()=>{if(done)return;const need=ex.parts.map((p,i)=>p[1]?i:-1).filter(i=>i>=0),miss=need.filter(i=>!sel.has(i)),extra=[...sel].filter(i=>!ex.parts[i][1]);const ok=!miss.length&&!extra.length;
+    if(ok){el.querySelectorAll('.tri-chips button').forEach((b,i)=>b.classList.add(ex.parts[i][1]?'good':'off'));fb(true,`Exact : seules ces données servent. Calcul : ${ex.calc}.`)}
+    else fb(false,`${miss.length?`Il manque ${miss.length} donnée${miss.length>1?'s':''} utile${miss.length>1?'s':''}. `:''}${extra.length?`${extra.length} donnée${extra.length>1?'s':''} sélectionnée${extra.length>1?'s ne servent':' ne sert'} pas au calcul.`:''} Ajuste ta sélection.`);finish(ok)}}
   else if(ex.kind==='toucher'){
    el.innerHTML=`<p class="question">${ex.q}</p><div class="exercise-visual"><svg class="cv touch-svg" viewBox="${ex.vb}">${ex.svg}${ex.pts.map((p,i)=>`<g class="tp${ex.visible?' vis':''}" data-i="${i}"><circle cx="${p.x}" cy="${p.y}" r="16" class="tp-hit"/><circle cx="${p.x}" cy="${p.y}" r="${ex.visible?6:4}" class="tp-dot"/></g>`).join('')}</svg></div><div class="inter-fb" hidden></div>`;
    el.querySelectorAll('.tp').forEach(g=>g.onclick=()=>{if(done)return;const i=+g.dataset.i,ok=i===ex.ok;g.classList.add(ok?'good':'wrong');fb(ok,ok?`Exact. ${ex.why}`:'Ce n’est pas ce point. Essaie encore.');finish(ok)})}

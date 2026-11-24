@@ -1,6 +1,6 @@
 (function(root){
  const KEY='maths-tiin-progress-v1';
- const count=12;
+ const count=(root.MathsExercises&&root.MathsExercises.THEMES.length)||13;
  function blank(){return {version:1,themes:Array.from({length:count},()=>({attempts:0,correct:0,mastery:0,levels:[0,0,0]})),diagnostics:[]}}
  function sanitize(v){const out=blank();if(!v||typeof v!=='object')return out;(v.themes||[]).slice(0,count).forEach((t,i)=>{if(!t)return;out.themes[i].attempts=Math.max(0,Number(t.attempts)||0);out.themes[i].correct=Math.max(0,Number(t.correct)||0);out.themes[i].mastery=Math.max(0,Math.min(100,Number(t.mastery)||0));out.themes[i].levels=[0,1,2].map(j=>Math.max(0,Number(t.levels&&t.levels[j])||0))});if(Array.isArray(v.diagnostics))out.diagnostics=v.diagnostics.slice(-5);return out}
  let state=blank();try{const raw=localStorage.getItem(KEY);if(raw)state=sanitize(JSON.parse(raw))}catch(e){}

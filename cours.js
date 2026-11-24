@@ -213,7 +213,27 @@
   methode:['Lire le titre et les deux axes : quelle grandeur, quelle unité ?','Repérer la valeur d’une graduation (de 1 en 1 ? de 5 en 5 ?).','Placer le point de lecture et tracer les pointillés jusqu’aux axes.','Pour une évolution : écart entre deux points, divisé par la durée si on veut un « par minute ».'],
   exemple:{enonce:'La température passe de 20 °C à t = 0 à 68 °C à t = 20 min. Variation moyenne ?',etapes:['Écart : 68 − 20 = 48 °C','Durée : 20 − 0 = 20 min','48 ÷ 20 = 2,4 °C/min'],reponse:'2,4 °C/min'},
   piege:'Compter les carreaux au lieu de lire la graduation : si une graduation vaut 5, trois carreaux font 15, pas 3.',
-  tiin:'Sur une courbe de décroissance radioactive, la lecture graphique permet de retrouver la période : le temps au bout duquel l’activité est divisée par 2.'}
+  tiin:'Sur une courbe de décroissance radioactive, la lecture graphique permet de retrouver la période : le temps au bout duquel l’activité est divisée par 2.'} // 12 — Décimaux et droite graduée
+ ,{accroche:'Manomètre, radiamètre à aiguille, jauge de cuve : lire une graduation et passer d’une fraction à un décimal, c’est lire correctement un appareil de mesure.',
+  visuel:svg('0 0 600 250',`
+   <line x1="40" y1="70" x2="560" y2="70" class="cv-line-b"/>
+   ${[...Array(11).keys()].map(i=>`<line x1="${40+i*52}" y1="${i%5?60:52}" x2="${40+i*52}" y2="${i%5?80:88}" class="cv-line"/>`).join('')}
+   <text x="40" y="108" text-anchor="middle" class="cv-tb">0</text><text x="300" y="108" text-anchor="middle" class="cv-t">0,5</text><text x="560" y="108" text-anchor="middle" class="cv-tb">1</text>
+   <circle cx="404" cy="70" r="8" class="cv-fill-accent"/><text x="404" y="40" text-anchor="middle" class="cv-tb cv-accent-t">0,7 = 7/10</text>
+   <path d="M404 80 L300 150 M456 80 L550 150" class="cv-dash"/>
+   <rect x="280" y="150" width="290" height="64" rx="10" class="cv-soft"/>
+   <line x1="300" y1="182" x2="550" y2="182" class="cv-line-b"/>
+   ${[...Array(11).keys()].map(i=>`<line x1="${300+i*25}" y1="${i%5?175:168}" x2="${300+i*25}" y2="${i%5?189:196}" class="cv-line"/>`).join('')}
+   <text x="300" y="210" text-anchor="middle" class="cv-small">0,70</text><text x="550" y="210" text-anchor="middle" class="cv-small">0,80</text>
+   <circle cx="425" cy="182" r="7" class="cv-fill-brand"/><text x="425" y="164" text-anchor="middle" class="cv-tb cv-brand-t">0,75</text>
+   <text x="20" y="240" class="cv-small">Zoom entre 0,7 et 0,8 : on trouve encore 9 graduations (0,71 ; 0,72 ; … ; 0,79)</text>`,'Droite graduée en dixièmes avec zoom en centièmes'),
+  legende:'Entre deux graduations, on peut toujours zoomer : entre 0,7 et 0,8 il y a 0,75, entre 0,75 et 0,76 il y a 0,755…',
+  retenir:['0,7 = 7/10   ·   0,07 = 7/100   ·   0,75 = 75/100 = 3/4','a/b = a ÷ b   (3/4 = 0,75)','Graduation = écart entre deux valeurs écrites ÷ nombre d’intervalles'],
+  methode:['Repérer deux valeurs écrites sur l’échelle.','Compter les intervalles (les espaces), pas les traits.','Valeur d’une graduation = écart ÷ nombre d’intervalles.','Valeur lue = valeur de départ + nombre de graduations × valeur d’une graduation.'],
+  exemple:{enonce:'Entre 2 et 3 bar, le manomètre a 5 intervalles. L’aiguille est sur la 4e graduation après 2. Pression ?',etapes:['Écart : 3 − 2 = 1 bar','Une graduation : 1 ÷ 5 = 0,2 bar','P = 2 + 4 × 0,2 = 2,8 bar'],reponse:'2,8 bar'},
+  piege:'0,75 n’est pas plus grand que 0,8 : on compare 0,75 et 0,80 (75 centièmes < 80 centièmes). Et 0,7 ne s’écrit pas 0/7 : c’est 7/10.',
+  tiin:'Un radiamètre à aiguille gradué de 10 en 10 µSv/h, avec 5 intervalles entre deux valeurs, se lit de 2 en 2 µSv/h. Une erreur de lecture de graduation fausse directement l’estimation de dose de l’intervention.'}
+
  ];
  root.MathsCours=COURS;if(typeof module!=='undefined'&&module.exports)module.exports=COURS;
 })(globalThis);

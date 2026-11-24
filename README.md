@@ -1,10 +1,19 @@
-# Maths TIIN v0.3
+# Maths TIIN v0.4
 
 Petite PWA d'entraînement en mathématiques pour les apprentis de Bac Pro TIIN.
 
 ## Objectif
 
 Permettre un entraînement court, progressif et autonome sur les outils mathématiques réellement mobilisés en Bac Pro TIIN : calcul numérique, nombres relatifs, fractions, puissances de 10, conversions, proportionnalité, pourcentages, formules, équations, géométrie, Pythagore/trigonométrie et lecture de données.
+
+## Nouveautés v0.4 — points de difficulté
+
+Ajouts ciblés sur les questions les moins réussies du test de positionnement national de seconde professionnelle (DEPP, 2025) :
+
+- **Nouveau thème « Décimaux et droite graduée »** (placé après Fractions) : fraction ↔ décimal (0,7 = 7/10), comparaison de décimaux (0,8 > 0,75), lecture d’une graduation, zoom entre deux décimaux, lecture de manomètre, radiamètre analogique et jauge de cuve. Fiche de cours, schéma manipulable et exercices interactifs.
+- **Nouveau format « Repère les données utiles »** : énoncé en environnement nucléaire avec des informations parasites ; l’élève sélectionne seulement les données nécessaires au calcul.
+- **Exercices ciblés** : règle des signes sur trois facteurs, carré ≠ double (a², 7², E = k × a²), substitution dans la formule du volume d’un cône.
+- Signe moins typographique (−) dans tous les énoncés.
 
 ## Nouveautés v0.3 — interactivité
 
@@ -24,11 +33,11 @@ Permettre un entraînement court, progressif et autonome sur les outils mathéma
 
 ## Fonctionnement
 
-- 12 thèmes ;
+- 13 thèmes ;
 - 3 niveaux : base, calculs, environnement nucléaire ;
 - valeurs aléatoires pour éviter l'apprentissage par cœur ;
 - indices progressifs et correction détaillée ;
-- test de départ de 12 questions ;
+- test de départ de 13 questions ;
 - progression enregistrée uniquement dans `localStorage` ;
 - aucun compte, nom d'apprenti ou donnée distante ;
 - fonctionnement hors ligne après la première visite grâce au service worker ;
