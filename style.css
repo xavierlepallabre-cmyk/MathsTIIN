@@ -60,3 +60,66 @@ main{max-width:1280px;margin:0 auto;padding:42px 24px 70px}.panel{animation:fade
 .unit:empty{display:none}
 .cv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 @media(max-width:620px){.cv-scroll .cv{min-width:540px}.cv-scroll::after{content:"↔ faire glisser le schéma";display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:4px}}
+/* ===== v0.3 : simulateurs ===== */
+.muted{color:var(--muted)}
+.fiche-sim{border-top:4px solid var(--accent)}.sim-consigne{margin:-4px 0 14px;font-size:13px}
+.sim-ico{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:var(--primary);color:#fff;font-size:14px}
+.sim{display:grid;gap:14px}.sim-ctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 18px}
+.sim-ctl{display:grid;gap:6px;font-size:13px;color:var(--muted)}.sim-ctl b{color:var(--ink);font-size:15px}
+.sim-ctl input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.sim-ctl select,.conv-row select,.conv-row input,.form-in input{font:500 15px var(--font);color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+.sim-toggle{display:flex;gap:6px;flex-wrap:wrap}.sim-toggle button,.format-picker button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:var(--r-pill);padding:8px 14px;font:600 13px var(--font);cursor:pointer}
+.sim-toggle button.active,.format-picker button.active{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.format-picker{display:flex;gap:6px;flex-wrap:wrap}
+.sim-steps{display:grid;gap:8px}.sim-step{display:flex;gap:10px;align-items:center;font-size:17px;background:var(--surface-2);border-radius:10px;padding:10px 12px;animation:fade .3s ease both}
+.sim-step span{flex:none;width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.sim-step mark{background:var(--accent-soft);color:var(--accent-text);border-radius:5px;padding:0 4px}
+.sim-result{background:var(--surface-2);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.6}.sim-result p{margin:2px 0}.sim-result.big{font-size:16px}.sim-result .hl{color:var(--accent-text);font-size:19px}
+.sim-tag{display:inline-block;border-radius:99px;padding:1px 9px;font-size:12px;font-weight:700;background:var(--surface);margin-left:6px}.sim-tag.ok{background:var(--ok-soft);color:var(--ok)}.sim-tag.bad{background:var(--bad-soft);color:var(--bad)}
+.sim-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:center}.sim-col{display:grid;gap:12px}
+.sim-svg{max-height:300px}.sim-tank,.sim-cyl{max-height:260px}.sim-tri .tri-key{cursor:pointer}.sim-tri .tri-hit{fill:transparent}.sim-tri .tri-key.on .tri-hit{fill:var(--accent-soft);stroke:var(--accent);stroke-width:3}.sim-tri .tri-key.on text{fill:var(--accent-text)}
+.frac{display:inline-grid;text-align:center;font-size:34px;font-weight:700;line-height:1.1}.frac span:first-child{border-bottom:3px solid var(--ink);color:var(--brand-text);padding:0 8px}
+.prefix-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.prefix-row>span{width:34px;color:var(--muted);font-size:12px}
+.prefix-row button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 9px;font:700 14px var(--font);cursor:pointer;display:grid;gap:1px;min-width:54px}
+.prefix-row button small{font-weight:500;color:var(--muted);font-size:11px}.prefix-row button.active{background:var(--primary);color:#fff;border-color:var(--primary)}.prefix-row.to button.active{background:var(--accent);border-color:var(--accent)}.prefix-row button.active small{color:#fff}
+.sim-chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.sim-chain>div{background:var(--surface-2);border-radius:10px;padding:10px 14px;font-size:17px}.sim-chain>div.hl{background:var(--accent-soft);color:var(--accent-text)}.sim-chain i{font-style:normal;color:var(--muted);font-size:13px}.sim-chain .sim-chain-full{flex-basis:100%;font-size:15px}
+.sim-actions{display:flex;gap:8px;flex-wrap:wrap}.sim-pop{animation:pop .3s ease}@keyframes pop{from{transform:scale(.94);transform-origin:center}}
+/* ===== exercices interactifs ===== */
+.inter{display:grid;gap:12px}.inter .question{margin:4px 0}
+.err-lines{display:grid;gap:8px}.err-lines button,.ord-pool button,.choice-grid button{appearance:none;text-align:left;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:13px 14px;font:500 16px var(--font);cursor:pointer;display:flex;gap:10px;align-items:center;transition:.15s}
+.err-lines button span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--brand-text)}
+.err-lines button:hover,.ord-pool button:hover,.choice-grid button:hover{border-color:var(--primary)}
+.good{border-color:var(--ok-line)!important;background:var(--ok-soft)!important;color:var(--ok)!important}.wrong{border-color:var(--bad-line)!important;background:var(--bad-soft)!important;color:var(--bad)!important;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.shake{animation:shake .35s}
+.ord-list{min-height:46px;background:var(--surface-2);border-radius:12px;padding:10px!important}.ord-list .ph{color:var(--muted);font-size:13px}.ord-list li{animation:fade .2s}
+.ord-pool{display:grid;gap:8px}.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice-grid button{justify-content:center;text-align:center;font-weight:600}
+.touch-svg .tp{cursor:pointer}.touch-svg .tp-hit{fill:transparent}.touch-svg .tp-dot{fill:var(--muted);opacity:.35}.touch-svg .tp.vis .tp-dot{fill:var(--primary);opacity:1}
+.touch-svg .tp:hover .tp-hit{fill:var(--accent-soft)}.touch-svg .tp.good .tp-dot{fill:var(--ok);opacity:1;r:9}.touch-svg .tp.wrong .tp-dot{fill:var(--bad);opacity:1;r:9}.touch-svg .tp.good,.touch-svg .tp.wrong{background:none!important;border:0!important;animation:none}
+.inter-done .err-lines button:not(.good),.inter-done .choice-grid button:not(.good){opacity:.55}
+/* ===== correction animée ===== */
+.corr-steps{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:7px}.corr-steps li,.corr-extra{opacity:0;animation:stepIn .4s ease forwards}.corr-steps li{display:flex;gap:9px;align-items:flex-start}
+.corr-steps li span{flex:none;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}.corr-extra{display:block;margin-top:8px}
+@keyframes stepIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+/* ===== défis ===== */
+.defis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.defi-card{display:flex;align-items:center;gap:14px;background:linear-gradient(120deg,var(--surface) 50%,var(--accent-soft));border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow)}
+.defi-card h2{font-size:16px;margin:0 0 2px}.defi-card p{margin:0;color:var(--muted);font-size:12px}.defi-card .btn{margin-left:auto;flex:none}.defi-ico{font-size:26px;width:48px;height:48px;border-radius:13px;background:var(--surface);display:grid;place-items:center;border:1px solid var(--line)}
+.mental-top{display:flex;align-items:center;gap:12px;margin:16px 0}.mental-time{flex:1;height:9px;background:var(--surface-2);border-radius:99px;overflow:hidden}.mental-time i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--accent),var(--primary));transition:width 1s linear}
+.mental-q{font-size:clamp(34px,7vw,56px);font-weight:700;text-align:center;margin:18px 0;letter-spacing:-.02em}
+/* ===== boîte à outils ===== */
+.tools-fab{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;align-items:center;gap:8px;border:0;border-radius:99px;background:var(--accent);color:#fff;font:700 14px var(--font);padding:12px 18px 12px 14px;box-shadow:0 8px 24px #0004;cursor:pointer}
+.tools-fab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tools-drawer{position:fixed;right:18px;bottom:78px;z-index:45;width:min(400px,calc(100vw - 24px));max-height:calc(100vh - 120px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 60px #0005;padding:18px;display:grid;gap:12px;animation:fade .18s}
+.tools-drawer h2{margin:0;font-size:19px}#toolsBody{display:grid;gap:10px}
+.conv-row{display:grid;grid-template-columns:1fr 120px;gap:8px}.conv-row output{background:var(--accent-soft);color:var(--accent-text);border-radius:9px;padding:9px 10px;font-weight:700;font-size:17px}.conv-arrow{text-align:center;color:var(--muted)}
+.form-in{display:grid;grid-template-columns:50px 1fr 60px;gap:8px;align-items:center}.form-in span{font-weight:700}.form-in em{font-style:normal;color:var(--muted);font-size:13px}
+.tool-result{background:var(--accent-soft);color:var(--accent-text);border-radius:10px;padding:12px;font-size:17px;text-align:center}
+/* ===== mode tableau ===== */
+html.board body{font-size:19px}html.board main{max-width:1500px}html.board footer,html.board .page-head .lead,html.board .tools-fab{display:none}
+html.board .question{font-size:30px}html.board .answer-row input{font-size:26px}html.board .exercise-layout{grid-template-columns:240px 1fr}
+html.board .fiche-grid{grid-template-columns:1fr}html.board .cv text{font-size:16px}html.board .sim-step,html.board .sim-result{font-size:21px}
+html.board .err-lines button,html.board .ord-pool button,html.board .choice-grid button{font-size:22px;padding:18px}html.board #boardBtn{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media(max-width:980px){.defis{grid-template-columns:1fr}.sim-row{grid-template-columns:1fr}}
+@media(max-width:620px){.defi-card{flex-wrap:wrap}.defi-card .btn{width:100%}.choice-grid{grid-template-columns:1fr}.tools-fab span{display:none}.tools-fab{padding:14px}.tools-drawer{right:12px;bottom:76px}#boardBtn{display:none}.top-actions{gap:4px}.mental-q{font-size:38px}}
+.sim-svg{max-width:760px;margin:0 auto;width:100%}
+.conv-row input,.conv-row select,.conv-row output,.sim-ctl select,.form-in input{min-width:0;width:100%;box-sizing:border-box}.tools-drawer{box-sizing:border-box}.tools-drawer>*{min-width:0}

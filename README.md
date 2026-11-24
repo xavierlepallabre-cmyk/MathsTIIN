@@ -1,4 +1,4 @@
-# Maths TIIN v0.2
+# Maths TIIN v0.3
 
 Petite PWA d'entraînement en mathématiques pour les apprentis de Bac Pro TIIN.
 
@@ -6,16 +6,26 @@ Petite PWA d'entraînement en mathématiques pour les apprentis de Bac Pro TIIN.
 
 Permettre un entraînement court, progressif et autonome sur les outils mathématiques réellement mobilisés en Bac Pro TIIN : calcul numérique, nombres relatifs, fractions, puissances de 10, conversions, proportionnalité, pourcentages, formules, équations, géométrie, Pythagore/trigonométrie et lecture de données.
 
+## Nouveautés v0.3 — interactivité
+
+- **Schémas à manipuler** dans chaque fiche de cours (`sims.js`) : curseurs et boutons qui recalculent en direct (cuve fractionnée, droite graduée, convertisseur de préfixes, débit de pompe, dose = débit × temps, triangle de la loi d’Ohm, balance d’équation, cuve cylindrique, triangle rectangle déformable, curseurs sur une courbe).
+- **Nouveaux formats d’exercices** (`interactifs.js`) : trouve l’erreur, remets dans l’ordre, touche le schéma, choisis la bonne réponse. Sélecteur « Format » : mélange, calcul ou interactif.
+- **Correction animée** : les étapes de la correction apparaissent une à une.
+- **Défis** (`outils.js`) : calcul mental en 60 s avec record sur l’appareil, échauffement de 5 exercices.
+- **Boîte à outils** accessible partout : convertisseur (longueur, surface, volume, débit, temps, dose, débit de dose, activité, puissance, pression) et calculatrice de formules.
+- **Mode tableau** pour la projection en classe (plein écran, gros caractères).
+- Les situations professionnelles sont désormais présentées comme « en environnement nucléaire ».
+
 ## Nouveautés v0.2
 
-- Onglet **Cours en images** : une fiche par thème avec schéma, « à retenir », méthode, exemple résolu à dévoiler étape par étape, piège classique et situation TIIN.
+- Onglet **Cours en images** : une fiche par thème avec schéma, « à retenir », méthode, exemple résolu à dévoiler étape par étape, piège classique et application en environnement nucléaire.
 - Boutons « Revoir le cours » depuis un exercice et « Cours » depuis le parcours.
 - 2 à 3 types d'énoncés par thème et par niveau (dépression des locaux, dose prévisionnelle, activité en Bq, section de tuyauterie, élingue, diagramme d'interventions…).
 
 ## Fonctionnement
 
 - 12 thèmes ;
-- 3 niveaux : base, calculs, situation TIIN ;
+- 3 niveaux : base, calculs, environnement nucléaire ;
 - valeurs aléatoires pour éviter l'apprentissage par cœur ;
 - indices progressifs et correction détaillée ;
 - test de départ de 12 questions ;
@@ -35,7 +45,7 @@ Formats acceptés : `12,5` · `-4.2` · `3/4` · `1e-3` · `2,5×10^-3` · `10^-
 node test-exercises.cjs
 ```
 
-Génère 7 200 exercices et vérifie que chaque bonne réponse est acceptée, qu'une erreur d'une unité ou un « 0 » est refusé, et que les formats de saisie sont bien lus.
+Génère 7 200 exercices numériques et plus de 4 000 exercices interactifs, et vérifie que chaque bonne réponse est acceptée, qu'une erreur d'une unité ou un « 0 » est refusé, et que les formats de saisie sont bien lus.
 
 ## Publication
 

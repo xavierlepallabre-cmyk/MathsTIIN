@@ -27,3 +27,18 @@ if (!M.check(frac, '0,29').ok || !M.check(frac, '0,286').ok) fail('Arrondi corre
 if (M.check(frac, '0,3').ok || M.check(frac, '0,28').ok) fail('Arrondi incorrect accepté');
 
 console.log(`OK — ${n} exercices générés et vérifiés, saisie et arrondis contrôlés`);
+
+// ---- Exercices interactifs ----
+const X = require('./interactifs.js');
+let m = 0;
+for (let t = 0; t < 12; t++) for (const k of X.kindsFor(t)) for (let i = 0; i < 150; i++) {
+  const e = X.generate(t, 1 + (i % 3), Math.random, k); m++;
+  const txt = JSON.stringify(e);
+  if (/undefined|NaN|Infinity/.test(txt)) fail(`Interactif cassé t${t} ${k} : ${txt.slice(0, 200)}`);
+  if (k === 'choix' && (e.okIndex < 0 || new Set(e.opts).size !== e.opts.length || e.opts.length < 3)) fail(`Choix invalide t${t} : ${e.opts}`);
+  if (k === 'erreur' && !(e.bad >= 0 && e.bad < e.lines.length)) fail(`Erreur invalide t${t}`);
+  if (k === 'ordre' && (e.order.length !== e.steps.length || e.order.every((v, j) => v === j))) fail(`Ordre invalide t${t}`);
+  if (k === 'toucher' && !(e.ok >= 0 && e.ok < e.pts.length)) fail(`Point cible introuvable t${t}`);
+}
+const covered = [...Array(12).keys()].filter(t => X.kindsFor(t).length).length;
+console.log(`OK — ${m} exercices interactifs générés (${covered}/12 thèmes couverts)`);

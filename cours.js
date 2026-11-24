@@ -1,5 +1,5 @@
 // Maths TIIN — fiches de cours visuelles (une par thème, même ordre que THEMES)
-// Chaque fiche : accroche TIIN, schéma SVG, à retenir, méthode, exemple résolu pas à pas, piège, situation TIIN.
+// Chaque fiche : accroche (environnement nucléaire), schéma SVG, à retenir, méthode, exemple résolu pas à pas, piège, application en environnement nucléaire.
 (function(root){
  const svg=(vb,body,label)=>`<svg class="cv" viewBox="${vb}" role="img" aria-label="${label}">${body}</svg>`;
  const arrowDefs='<defs><marker id="cvArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="cv-fill-ink"/></marker><marker id="cvArrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="cv-fill-accent"/></marker></defs>';
