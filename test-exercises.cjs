@@ -7,7 +7,8 @@ for (let t = 0; t < M.THEMES.length; t++) for (let l = 1; l <= 3; l++) for (let 
   const e = M.generate(t, l); n++;
   if (!Number.isFinite(e.answer)) fail(`Réponse invalide t${t} l${l}`);
   if (!e.question || !e.correction || !e.hints.length) fail(`Énoncé incomplet t${t} l${l}`);
-  if (/undefined|NaN/.test(e.question + e.correction)) fail(`Texte cassé t${t} l${l} : ${e.question}`);
+  if (/undefined|NaN|Infinity/.test(e.question + e.correction)) fail(`Texte cassé t${t} l${l} : ${e.question}`);
+  if (/\d[.,]\d{7,}|e[-+]\d/.test(e.question + e.correction)) fail(`Nombre mal formaté t${t} l${l} : ${e.question} | ${e.correction}`);
   if (!M.check(e, String(e.answer)).ok) fail(`Bonne réponse refusée t${t} l${l} : ${e.answer}`);
   if (!M.check(e, String(e.answer).replace('.', ',')).ok) fail(`Virgule refusée t${t} l${l}`);
   // Une erreur d'une unité sur un résultat entier doit être refusée

@@ -25,7 +25,7 @@
     <nav class="tabs" aria-label="Navigation principale">
       <button data-tab="parcours" class="active" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/></svg><span>Parcours</span></button>
       <button data-tab="exercices"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h4"/></svg><span>Exercices</span></button>
-      <button data-tab="reperes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h3M14 12h2M8 16h8"/></svg><span>Repères</span></button>
+      <button data-tab="cours"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h3M14 12h2M8 16h8"/></svg><span>Cours</span></button>
       <button data-tab="progression"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/></svg><span>Progression</span></button>
     </nav>
     <div class="top-actions">
@@ -64,7 +64,7 @@
       </div>
     </aside>
     <section class="card exercise-card" aria-live="polite">
-      <div class="exercise-head"><div><span class="exercise-meta" id="exerciseMeta"></span><h2 id="exerciseTitle">Exercice</h2></div><button class="btn btn-ghost" id="newExercise">Nouvel exercice</button></div>
+      <div class="exercise-head"><div><span class="exercise-meta" id="exerciseMeta"></span><h2 id="exerciseTitle">Exercice</h2></div><div class="head-actions"><button class="btn btn-ghost" id="toCours" type="button">Revoir le cours</button><button class="btn btn-ghost" id="newExercise">Nouvel exercice</button></div></div>
       <div id="exerciseVisual"></div>
       <p class="question" id="exerciseQuestion"></p>
       <form id="answerForm" novalidate>
@@ -80,9 +80,10 @@
   </div>
 </section>
 
-<section id="reperes" class="panel hidden">
-  <div class="page-head"><div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>03 · Retrouver</p><h1>Repères utiles</h1><p class="lead">Pas un cours complet : les relations et méthodes à avoir sous la main pendant l’entraînement.</p></div></div>
-  <div class="reference-grid" id="referenceGrid"></div>
+<section id="cours" class="panel hidden">
+  <div class="page-head"><div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>03 · Comprendre</p><h1>Cours en images</h1><p class="lead">Une fiche par thème : un schéma, l’essentiel à retenir, la méthode, un exemple résolu étape par étape et le piège classique.</p></div></div>
+  <div class="cours-chips" id="coursChips" role="tablist" aria-label="Choisir un thème"></div>
+  <article class="fiche" id="fiche" aria-live="polite"></article>
 </section>
 
 <section id="progression" class="panel hidden">
@@ -101,8 +102,9 @@
   </section>
 </div>
 
-<footer><div class="credits"><p><strong>Conception originale : Xavier Le Pallabre</strong></p><p>Ressource pédagogique développée à titre personnel, avec l'assistance d'outils d'intelligence artificielle.</p><p>© 2026 Xavier Le Pallabre — Attribution de l'auteur original à conserver lors des réutilisations et adaptations, conformément à la licence applicable (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" rel="license noopener" target="_blank">CC BY-NC-SA 4.0</a>).</p></div><span>Maths TIIN v0.1.1 · progression enregistrée uniquement sur cet appareil</span></footer>
+<footer><div class="credits"><p><strong>Conception originale : Xavier Le Pallabre</strong></p><p>Ressource pédagogique développée à titre personnel, avec l'assistance d'outils d'intelligence artificielle.</p><p>© 2026 Xavier Le Pallabre — Attribution de l'auteur original à conserver lors des réutilisations et adaptations, conformément à la licence applicable (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" rel="license noopener" target="_blank">CC BY-NC-SA 4.0</a>).</p></div><span>Maths TIIN v0.2 · progression enregistrée uniquement sur cet appareil</span></footer>
 <script src="exercises.js"></script>
+<script src="cours.js"></script>
 <script src="progress.js"></script>
 <script src="app.js"></script>
 </body>

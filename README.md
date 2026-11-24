@@ -1,10 +1,16 @@
-# Maths TIIN v0.1.1
+# Maths TIIN v0.2
 
 Petite PWA d'entraînement en mathématiques pour les apprentis de Bac Pro TIIN.
 
 ## Objectif
 
 Permettre un entraînement court, progressif et autonome sur les outils mathématiques réellement mobilisés en Bac Pro TIIN : calcul numérique, nombres relatifs, fractions, puissances de 10, conversions, proportionnalité, pourcentages, formules, équations, géométrie, Pythagore/trigonométrie et lecture de données.
+
+## Nouveautés v0.2
+
+- Onglet **Cours en images** : une fiche par thème avec schéma, « à retenir », méthode, exemple résolu à dévoiler étape par étape, piège classique et situation TIIN.
+- Boutons « Revoir le cours » depuis un exercice et « Cours » depuis le parcours.
+- 2 à 3 types d'énoncés par thème et par niveau (dépression des locaux, dose prévisionnelle, activité en Bq, section de tuyauterie, élingue, diagramme d'interventions…).
 
 ## Fonctionnement
 
