@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12204A" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Maths TIIN — entraînement progressif en mathématiques pour le Bac Pro TIIN">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script>try{const t=localStorage.getItem('maths-tiin-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>Maths TIIN</title>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="brand" type="button" data-tab="parcours" aria-label="Maths TIIN — accueil">
+      <span class="brand-mark" aria-hidden="true"><b>∑</b><i>TIIN</i></span>
+      <span class="brand-sep" aria-hidden="true"></span>
+      <span class="brand-text"><span class="eyebrow">Mathématiques · Bac Pro TIIN</span><strong>Maths <span>TIIN</span></strong></span>
+    </button>
+    <nav class="tabs" aria-label="Navigation principale">
+      <button data-tab="parcours" class="active" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/></svg><span>Parcours</span></button>
+      <button data-tab="exercices"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h4"/></svg><span>Exercices</span></button>
+      <button data-tab="reperes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h3M14 12h2M8 16h8"/></svg><span>Repères</span></button>
+      <button data-tab="progression"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/></svg><span>Progression</span></button>
+    </nav>
+    <div class="top-actions">
+      <span class="status-pill" id="netStatus" hidden><span class="dot"></span>Hors ligne</span>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Basculer le thème clair / sombre" title="Thème clair / sombre"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg></button>
+    </div>
+  </div>
+  <div class="bar-accent" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section id="parcours" class="panel">
+  <div class="page-head">
+    <div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>01 · Progresser</p><h1>Ton parcours en maths</h1><p class="lead">Travaille thème par thème. Commence par les bases, puis passe aux calculs et aux situations techniques.</p></div>
+    <button class="btn btn-primary" id="startDiagnostic">Faire le test de départ</button>
+  </div>
+  <div class="summary-grid">
+    <article class="summary-card"><span>Niveau global</span><strong id="globalMastery">0 %</strong><small>calculé à partir de tes entraînements</small></article>
+    <article class="summary-card"><span>Questions traitées</span><strong id="globalAttempts">0</strong><small>sur cet appareil</small></article>
+    <article class="summary-card"><span>À travailler en priorité</span><strong id="priorityTheme">Commence par un thème</strong><small id="priorityHint">Le parcours s’adapte à ta progression.</small></article>
+  </div>
+  <div id="themeGrid" class="theme-grid"></div>
+</section>
+
+<section id="exercices" class="panel hidden">
+  <div class="page-head">
+    <div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>02 · S’entraîner</p><h1>Exercices</h1><p class="lead">Choisis un thème et un niveau. Les valeurs changent à chaque nouvel exercice.</p></div>
+  </div>
+  <div class="exercise-layout">
+    <aside class="card picker-card">
+      <h2>Thème</h2><div id="themePicker" class="theme-picker" role="radiogroup"></div>
+      <h2>Niveau</h2><div id="levelPicker" class="level-picker" role="radiogroup">
+        <button type="button" data-level="1" class="active" aria-checked="true"><b>1</b><span>Base</span><small>calcul direct</small></button>
+        <button type="button" data-level="2" aria-checked="false"><b>2</b><span>Calculs</span><small>plusieurs étapes</small></button>
+        <button type="button" data-level="3" aria-checked="false"><b>3</b><span>Situation TIIN</span><small>problème concret</small></button>
+      </div>
+    </aside>
+    <section class="card exercise-card" aria-live="polite">
+      <div class="exercise-head"><div><span class="exercise-meta" id="exerciseMeta"></span><h2 id="exerciseTitle">Exercice</h2></div><button class="btn btn-ghost" id="newExercise">Nouvel exercice</button></div>
+      <div id="exerciseVisual"></div>
+      <p class="question" id="exerciseQuestion"></p>
+      <form id="answerForm" novalidate>
+        <label for="answerInput">Ta réponse</label>
+        <div class="answer-row"><input id="answerInput" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex. 12,5 ou 3/4"><span id="answerUnit" class="unit"></span><button class="btn btn-primary" type="submit">Valider</button></div>
+        <p class="input-help">Acceptés : 12,5 · 3/4 · 2,5×10^-3 · 1e-3. Un arrondi correct (au moins 2 chiffres significatifs) est accepté.</p>
+      </form>
+      <div id="feedback" class="feedback" hidden></div>
+      <div class="help-actions"><button id="hintBtn" class="btn btn-ghost" type="button">Un indice</button><button id="correctionBtn" class="btn btn-ghost" type="button">Voir la correction</button></div>
+      <div id="hintBox" class="hint-box" hidden></div>
+      <div id="correctionBox" class="correction-box" hidden></div>
+    </section>
+  </div>
+</section>
+
+<section id="reperes" class="panel hidden">
+  <div class="page-head"><div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>03 · Retrouver</p><h1>Repères utiles</h1><p class="lead">Pas un cours complet : les relations et méthodes à avoir sous la main pendant l’entraînement.</p></div></div>
+  <div class="reference-grid" id="referenceGrid"></div>
+</section>
+
+<section id="progression" class="panel hidden">
+  <div class="page-head"><div><p class="tag"><span class="bars"><i></i><i></i><i></i></span>04 · Suivre</p><h1>Progression</h1><p class="lead">Les données restent uniquement dans le navigateur de cet appareil. Aucun nom ni compte n’est nécessaire.</p></div><button id="resetProgress" class="btn btn-danger">Effacer ma progression</button></div>
+  <article class="card progress-overview"><div class="donut" id="progressDonut"><span id="progressPercent">0 %</span></div><div><h2>Vue d’ensemble</h2><p id="progressText">Commence quelques exercices pour construire ton profil.</p><button id="copyReport" type="button" class="btn btn-ghost">Copier mon bilan</button></div></article>
+  <div id="progressList" class="progress-list"></div>
+</section>
+</main>
+
+<div id="diagnosticDialog" class="dialog-backdrop" hidden>
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="diagTitle">
+    <div class="dialog-head"><div><p class="tag">Test de départ</p><h2 id="diagTitle">12 questions · une par thème</h2></div><button id="closeDiagnostic" class="icon-btn" type="button" aria-label="Fermer">×</button></div>
+    <div id="diagIntro"><p>Ce test sert uniquement à repérer les thèmes à retravailler. Il n’y a pas de note enregistrée ni de classement.</p><button id="launchDiagnostic" class="btn btn-primary">Commencer</button></div>
+    <div id="diagRun" hidden><div class="diag-progress"><span id="diagCounter">1 / 12</span><div><i id="diagBar"></i></div></div><h3 id="diagTheme"></h3><div id="diagVisual"></div><p id="diagQuestion" class="question"></p><form id="diagForm"><label for="diagInput">Réponse</label><div class="answer-row"><input id="diagInput" type="text" inputmode="decimal" autocomplete="off"><span id="diagUnit" class="unit"></span><button class="btn btn-primary">Suivant</button></div></form></div>
+    <div id="diagResult" hidden></div>
+  </section>
+</div>
+
+<footer><div class="credits"><p><strong>Conception originale : Xavier Le Pallabre</strong></p><p>Ressource pédagogique développée à titre personnel, avec l'assistance d'outils d'intelligence artificielle.</p><p>© 2026 Xavier Le Pallabre — Attribution de l'auteur original à conserver lors des réutilisations et adaptations, conformément à la licence applicable (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" rel="license noopener" target="_blank">CC BY-NC-SA 4.0</a>).</p></div><span>Maths TIIN v0.1.1 · progression enregistrée uniquement sur cet appareil</span></footer>
+<script src="exercises.js"></script>
+<script src="progress.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
