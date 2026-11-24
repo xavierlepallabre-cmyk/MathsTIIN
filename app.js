@@ -70,6 +70,6 @@
  // Theme / offline
  $('#themeToggle').addEventListener('click',()=>{const cur=document.documentElement.dataset.theme||((matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'),next=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('maths-tiin-theme',next)}catch(e){}});
  function net(){const off=!navigator.onLine;$('#netStatus').hidden=!off}addEventListener('online',net);addEventListener('offline',net);net();
- if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+ if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{}));
  ['#answerInput','#diagInput'].forEach(s=>globalThis.MathKeys&&MathKeys.attach($(s)));renderPickers();renderChips();renderFiche();renderParcours();renderProgress();newExercise();
 })();

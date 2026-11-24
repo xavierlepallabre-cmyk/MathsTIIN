@@ -142,3 +142,4 @@ html.board .mathkeys button{font-size:24px;min-height:56px}
 .answer-row.has-keys{flex-wrap:wrap}.answer-row.has-keys .mathkeys{flex-basis:100%;order:2;margin-top:0}
 @media(max-width:620px){.answer-row.has-keys .mathkeys{grid-column:1/-1;order:1}.answer-row.has-keys .btn{order:2}}
 .mathkeys button{flex:1 1 40px;padding:0 4px}
+.mathkeys button.hit{background:var(--accent);color:#fff}
